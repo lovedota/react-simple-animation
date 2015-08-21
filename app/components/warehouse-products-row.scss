@@ -1,0 +1,22 @@
+$class: warehouse-products-row;
+
+.#{$class} {
+  .cell {
+    &.collapsed {
+       padding: 0;
+       border: 1px solid transparent;
+    }
+
+    .wrapper {
+      overflow: hidden;
+      height: 0;
+      transition: height 500ms;
+    }
+
+  }
+
+  &__new-item {
+    opacity: 0;
+    animation: new-item-animation .3s linear forwards
+  }
+}
