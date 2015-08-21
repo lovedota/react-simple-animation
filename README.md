@@ -4,8 +4,7 @@
 - This repo is used with **Flux Architecture**. Please read more in https://facebook.github.io/flux/
 - This repo is used for testing typescript/react. It may not work in the future.
 - This repo is used webpack/babel for building with react jsx
-- Please checkout my blog for more detail:
-- https://my-coding-blog.herokuapp.com/article/55d1ae8757a49c03000997da/reactjs-basic-transition-for-moving-items
+- Please checkout my blog for more detail: http://my-coding-blog.herokuapp.com/article/55d1ae8757a49c03000997da/reactjs-basic-transition-for-moving-items
 
 ### Install
 
