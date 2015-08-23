@@ -1,8 +1,9 @@
-var path = require('path');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path'),
+  ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-    entry: './app/main.tsx',
+    context: path.join(__dirname, 'app'),
+    entry: './main.tsx',
     resolve: {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
@@ -19,15 +20,21 @@ module.exports = {
             },
             {
               test: /\.scss$/,
-              loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader?includePaths[]='+ path.resolve(__dirname, "./node_modules"))
+              loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader?includePaths[]='+ path.resolve(__dirname, "./node_modules"))
             },
             {
               test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
               loader: 'url-loader?limit=10000'
             },
+            {
+               test: /bootstrap[^\.]+.js$/,
+               loader: 'imports?jQuery=jquery,$=jquery',
+            }
         ]
     },
     plugins: [
         new ExtractTextPlugin("styles.css")
-    ]
+    ],
+    debug: true,
+    devtool: 'source-map'
 };

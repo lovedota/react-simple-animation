@@ -1,7 +1,7 @@
 import 'bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-import * as React from 'react';
+import * as React       from 'react';
 import WarehouseActions from './actions/warehouse-actions';
-import WarehousePage from './components/warehouse-page';
+import WarehousePage    from './components/warehouse/warehouse-page';
 
 WarehouseActions.getWarehouses();
 

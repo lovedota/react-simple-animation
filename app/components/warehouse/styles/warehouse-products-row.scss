@@ -2,8 +2,10 @@ $class: warehouse-products-row;
 
 .#{$class} {
   .cell {
+    padding-left: 199px;
+
     &.collapsed {
-       padding: 0;
+       padding: 0px 0px 0px 199px;
        border: 1px solid transparent;
     }
 
@@ -13,6 +15,17 @@ $class: warehouse-products-row;
       transition: height 500ms;
     }
 
+    .name-column {
+      width: 150px;
+    }
+
+    .quantity-column {
+      width: 100px;
+    }
+
+    .action-column {
+      width: 100px;
+    }
   }
 
   &__new-item {

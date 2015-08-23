@@ -7,11 +7,11 @@ import WarehouseConstants from '../constants/warehouse-constants';
 
 interface WarehouseAction {
   type: string;
-  warehouses?: any[];
-  warehouseId?: any;
+  warehouses?: Warehouse[];
+  warehouseId?: string;
 }
 
-let _warehouses: Immutable.Map<any, any>;
+let _warehouses: Immutable.Map<string, Warehouse>;
 
 class WarehouseStore extends EventEmitter {
   constructor() {
@@ -19,20 +19,24 @@ class WarehouseStore extends EventEmitter {
     Dispatcher.register((action: WarehouseAction) => {
       switch(action.type) {
         case WarehouseConstants.WAREHOUSE_LOAD_COMPLETE:
-          _warehouses = Immutable.Map<any, any>(
-            action.warehouses.map(w => {
-              return [w.id, Object.assign(w, {expanded: false})];
-            })
-          );
+          convertWarehousesToViewModel(action.warehouses);
           this.emitChange();
           break;
-        case WarehouseConstants.WAREHOUSE_TOGGLE_ITEM:
+
+        case WarehouseConstants.WAREHOUSE_ITEM_TOGGLE:
+          toggleWarehouseItem(action.warehouseId);
+          this.emitChange();
+          break;
+
+        case WarehouseConstants.WAREHOUSE_PRODUCT_TOGGLE:
           _warehouses = _warehouses.update(action.warehouseId, (warehouse) => {
             warehouse.expanded = !warehouse.expanded;
             return warehouse;
           });
           this.emitChange();
           break;
+
+
         default:
           break;
       }
@@ -54,6 +58,21 @@ class WarehouseStore extends EventEmitter {
   emitChange() {
     this.emit(WarehouseConstants.WAREHOUSE_CHANGE_EVENT);
   }
+}
+
+function convertWarehousesToViewModel(warehouses: Warehouse[]) {
+  _warehouses = Immutable.Map<string, Warehouse>(
+    warehouses.map(w => {
+      return [w.id, Object.assign(w, {expanded: false})];
+    })
+  );
+}
+
+function toggleWarehouseItem(warehouseId) {
+  _warehouses = _warehouses.update(warehouseId, (warehouse) => {
+    warehouse.expanded = !warehouse.expanded;
+    return warehouse;
+  });
 }
 
 export default new WarehouseStore();

@@ -1,19 +1,18 @@
-import * as React from 'react';
-import WarehouseRow from './warehouse-row';
+import './styles/warehouse-list.scss';
+import * as React 				  from 'react';
+import classNames 					from 'classnames';
+import WarehouseRow 				from './warehouse-row';
 import WarehouseProductsRow from './warehouse-products-row';
 
 interface Props {
-	warehouses: any[];
+	warehouses: Warehouse[];
 	isProcessing: boolean;
 }
 
 class WarehouseListComponent extends React.Component<Props, {}> {
-  getTableCssClasses() {
-  	return this.props.isProcessing ? 'table table-bordered wait' : 'table table-bordered';
-  }
-
   render() {
     let warehouses = this.props.warehouses,
+			tableCssClasses = classNames('warehouse-list table table-bordered', {wait: this.props.isProcessing}),
       rows = [];
 
     warehouses.forEach((warehouse, index) => {
@@ -22,10 +21,12 @@ class WarehouseListComponent extends React.Component<Props, {}> {
     });
 
     return (
-        <table className={this.getTableCssClasses()}>
+        <table className={tableCssClasses}>
           <thead>
-              <th></th>
-              <th>Name</th>
+            <th className="name-column">Name</th>
+						<th className="number-of-products-column">Number of Products</th>
+						<th className="total-quantity-column">Total Quantity</th>
+						<th></th>
           </thead>
           <tbody>
 						{rows}

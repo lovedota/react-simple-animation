@@ -10,9 +10,9 @@ class WarehouseActions {
     });
   }
 
-  toogleWarehouseItem(warehouseId) {
+  toogleWarehouseItem(warehouseId: string) {
     Dispatcher.dispatch({
-      type: WarehouseConstants.WAREHOUSE_TOGGLE_ITEM,
+      type: WarehouseConstants.WAREHOUSE_ITEM_TOGGLE,
       warehouseId
     });
   }

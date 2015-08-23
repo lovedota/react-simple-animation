@@ -1,13 +1,10 @@
-import './warehouse-products-row.scss';
+import './styles/warehouse-products-row.scss';
 import * as React from 'react';
+import classNames from "classnames";
 
 interface Props {
-	warehouse: any;
+	warehouse: Warehouse;
 	key: any;
-}
-
-interface Refs {
-	warehouseProductsTable: any;
 }
 
 interface WarehouseProductState {
@@ -38,34 +35,36 @@ class WarehouseProductsRowComponent extends React.Component<Props, WarehouseProd
   }
 
   render() {
-      let rows = [],
-        cellCssClasses = this.props.warehouse.expanded ? ' cell' : ' cell collapsed',
+      let warehouse = this.props.warehouse,
+				rows = [],
+        cellCssClasses = classNames('cell', {collapsed: !warehouse.expanded}),
         wrapperStyles = {
           height: this.state.height
         },
-        products = this.props.warehouse.products;
+        products = warehouse.products;
 
       products.forEach(p => {
+				let rowCssClasses = classNames({'new-item': p.isNew});
         rows.push(
-          <tr className={p.isNew ? 'new-item' : ''} key={'children-item-' + p.id} id={'child-' + p.id}>
-               <td>{p.id}</td>
+          <tr className={rowCssClasses} key={`warehouse-product-${p.id}`} id={`warehouse-product-${p.id}`}>
                <td>{p.name}</td>
                <td>{p.quantity}</td>
                <td><a href="#" onClick={this.move.bind(this, p.id)}>Move</a></td>
+							 <td></td>
            </tr>
         )
       });
 
     return (
     	<tr className="well warehouse-products-row">
-      	<td colSpan={2} className={cellCssClasses}>
+      	<td colSpan={4} className={cellCssClasses}>
         	<div className="wrapper" style={wrapperStyles}>
-            <table className="table" ref="warehouseProductsTable">
+            <table className="table table-bordered" ref="warehouseProductsTable">
               <thead>
-                <th></th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th></th>
+                <th className="name-column">Name</th>
+                <th className="quantity-column">Quantity</th>
+                <th className="action-column">Actions</th>
+								<th></th>
               </thead>
               <tbody>
                 {rows}

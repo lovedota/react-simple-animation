@@ -1,0 +1,7 @@
+$class: warehouse-row;
+
+.#{$class} {
+  .name-cell {
+    cursor: pointer;
+  }
+}

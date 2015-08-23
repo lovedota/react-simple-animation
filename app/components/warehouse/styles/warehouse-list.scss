@@ -1,0 +1,15 @@
+$class: warehouse-list;
+
+.#{$class} {
+  .name-column {
+    width: 200px;
+  }
+
+  .number-of-products-column {
+    width: 150px;
+  }
+
+  .total-quantity-column {
+    width: 100px;
+  }
+}
