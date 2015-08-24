@@ -1,8 +1,8 @@
-import * as React     from 'react';
-import logClass       from '../../decorators/log-class-decorator';
-import WarehouseList  from './warehouse-list';
-import BootstrapModal from '../common/bootstrap-modal';
-import WarehouseStore from '../../stores/warehouse-store';
+import * as React              from 'react';
+import logClass                from '../../decorators/log-class-decorator';
+import WarehouseList           from './warehouse-list';
+import WarehouseCommandButtons from './warehouse-command-buttons';
+import WarehouseStore          from '../../stores/warehouse-store';
 
 interface Props {
 
@@ -11,12 +11,18 @@ interface Props {
 interface WarehousePageState {
   warehouses: Warehouse[];
   isProcessing: boolean;
+  hasNotCheckedProduct: boolean;
+  shouldScroll: boolean;
+  nextWarehouseId: string;
 }
 
 function getStateFromStores(): WarehousePageState {
   return {
     warehouses: WarehouseStore.warehouses,
-    isProcessing: false
+    isProcessing: false,
+    hasNotCheckedProduct: WarehouseStore.hasNotCheckedProduct,
+    shouldScroll: WarehouseStore.shouldScroll,
+    nextWarehouseId: WarehouseStore.nextWarehouseId
   };
 }
 
@@ -40,18 +46,13 @@ class WarehousePageComponent extends React.Component<Props, {}> {
   render() {
      return (
        <div>
+        <WarehouseCommandButtons disabled={this.state.hasNotCheckedProduct}/>
         <WarehouseList
           warehouses={this.state.warehouses}
+          shouldScroll={this.state.shouldScroll}
+          nextWarehouseId={this.state.nextWarehouseId}
           isProcessing={this.state.isProcessing}
         />
-        <BootstrapModal
-          title="Move Products to Warehouse"
-          confirm="Move"
-          cancel="Close"
-          onConfirm={this._handleMoveProductsToWarehouse}
-        >
-          123
-        </BootstrapModal>
        </div>
      );
 
@@ -62,6 +63,7 @@ class WarehousePageComponent extends React.Component<Props, {}> {
   }
 
   _onChange = () => {
+    let state = getStateFromStores();
     this.setState(getStateFromStores());
   }
 }

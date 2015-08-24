@@ -23,14 +23,21 @@ class WarehouseService {
           id: '2',
           name: 'Warehouse 1',
           products: [
-            {id: '1a',name: 'Product 1.1', quantity: 1},
+            {id: '1b',name: 'Product 1.1', quantity: 1},
           ]
       },
       {
           id: '3',
           name: 'Warehouse 2',
           products: [
-            {id: '2a',name: 'Product 2.1', quantity: 5},
+            {id: '2c',name: 'Product 2.1', quantity: 5},
+          ]
+      },
+      {
+          id: '4',
+          name: 'Warehouse 3',
+          products: [
+            {id: '3d',name: 'Product 3.1', quantity: 5},
           ]
       }
     ]

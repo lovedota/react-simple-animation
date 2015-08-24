@@ -9,17 +9,6 @@ interface Props {
 }
 
 class WarehouseRowComponent extends React.Component<Props, {}> {
-
-	toggle(warehouseId) {
-		WarehouseActions.toogleWarehouseItem(warehouseId);
-	}
-
-	calculateTotalQuantity(warehouse: Warehouse) {
-		return warehouse.products.reduce((count, product) => {
-			return count + product.quantity;
-		}, 0);
-	}
-
 	render() {
 		let warehouse = this.props.warehouse,
 			toggleCssClasses = classNames('glyphicon', {
@@ -28,8 +17,8 @@ class WarehouseRowComponent extends React.Component<Props, {}> {
 			});
 
 		return (
-			<tr className="warehouse-row" id={`parent-$(warehouse.id)`}>
-				<td className="name-cell" onClick={this.toggle.bind(this, warehouse.id)}>
+			<tr className="warehouse-row" id={`warehouse-${warehouse.id}`}>
+				<td className="name-cell" onClick={this.handleRowToggle.bind(this, warehouse.id)}>
 					<span className={toggleCssClasses}></span>
 					{warehouse.name}
 				</td>
@@ -38,6 +27,16 @@ class WarehouseRowComponent extends React.Component<Props, {}> {
 				<td></td>
 			</tr>
 		);
+	}
+
+	private handleRowToggle(warehouseId) {
+		WarehouseActions.toogleWarehouseItem(warehouseId);
+	}
+
+	private calculateTotalQuantity(warehouse: Warehouse) {
+		return warehouse.products.reduce((count, product) => {
+			return count + product.quantity;
+		}, 0);
 	}
 }
 

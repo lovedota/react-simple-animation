@@ -7,6 +7,8 @@ import WarehouseProductsRow from './warehouse-products-row';
 interface Props {
 	warehouses: Warehouse[];
 	isProcessing: boolean;
+	shouldScroll: boolean;
+	nextWarehouseId: string;
 }
 
 class WarehouseListComponent extends React.Component<Props, {}> {
@@ -17,7 +19,14 @@ class WarehouseListComponent extends React.Component<Props, {}> {
 
     warehouses.forEach((warehouse, index) => {
       rows.push(<WarehouseRow warehouse={warehouse} key={`warehouse-row-${warehouse.id}`}/>);
-      rows.push(<WarehouseProductsRow warehouse={warehouse} key={`warehouse-products-row-${warehouse.id}`}/>);
+      rows.push(
+				<WarehouseProductsRow
+					warehouse={warehouse}
+					key={`warehouse-products-row-${warehouse.id}`}
+					shouldScroll={this.props.shouldScroll}
+					nextWarehouseId={this.props.nextWarehouseId}
+				/>
+			);
     });
 
     return (

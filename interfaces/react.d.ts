@@ -262,6 +262,7 @@ declare module React {
     }
 
     interface FormEvent extends SyntheticEvent {
+
     }
 
     interface MouseEvent extends SyntheticEvent {

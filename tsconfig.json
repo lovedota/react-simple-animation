@@ -17,7 +17,7 @@
         "./app/constants/warehouse-constants.ts",
         "./app/cores/dispatcher.ts",
         "./app/decorators/log-class-decorator.ts",
-        "./app/helpers/autobind-decorator.ts",
+        "./app/helpers/interaction-helpers.ts",
         "./app/services/warehouse-services.ts",
         "./app/stores/warehouse-store.ts",
         "./interfaces/classnames.d.ts",
@@ -31,10 +31,12 @@
         "./typings/flux/flux.d.ts",
         "./typings/tsd.d.ts",
         "./app/components/common/bootstrap-modal.tsx",
+        "./app/components/warehouse/warehouse-command-buttons.tsx",
         "./app/components/warehouse/warehouse-list.tsx",
         "./app/components/warehouse/warehouse-page.tsx",
         "./app/components/warehouse/warehouse-products-row.tsx",
         "./app/components/warehouse/warehouse-row.tsx",
+        "./app/components/warehouse/warehouse-selection-modal.tsx",
         "./app/main.tsx"
     ]
 }

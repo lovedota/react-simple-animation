@@ -1,12 +1,14 @@
 $class: warehouse-list;
 
 .#{$class} {
+  margin-top: 40px;
+  
   .name-column {
     width: 200px;
   }
 
   .number-of-products-column {
-    width: 150px;
+    width: 180px;
   }
 
   .total-quantity-column {

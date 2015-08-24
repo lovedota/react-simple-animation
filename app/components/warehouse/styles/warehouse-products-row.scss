@@ -16,7 +16,7 @@ $class: warehouse-products-row;
     }
 
     .name-column {
-      width: 150px;
+      width: 180px;
     }
 
     .quantity-column {
@@ -28,8 +28,20 @@ $class: warehouse-products-row;
     }
   }
 
-  &__new-item {
+  .new-item {
     opacity: 0;
     animation: new-item-animation .3s linear forwards
+  }
+
+  @keyframes new-item-animation {
+    from {
+      opacity: 0;
+      transform: scale(0)
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1)
+    }
   }
 }

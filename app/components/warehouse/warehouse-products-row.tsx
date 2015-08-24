@@ -1,10 +1,14 @@
 import './styles/warehouse-products-row.scss';
-import * as React from 'react';
-import classNames from "classnames";
+import * as React 			 from 'react';
+import classNames 			 from "classnames";
+import WarehouseActions  from '../../actions/warehouse-actions';
+import InteractionHelper from '../../helpers/interaction-helpers';
 
 interface Props {
 	warehouse: Warehouse;
 	key: any;
+	shouldScroll: boolean;
+	nextWarehouseId: string;
 }
 
 interface WarehouseProductState {
@@ -20,14 +24,20 @@ class WarehouseProductsRowComponent extends React.Component<Props, WarehouseProd
   }
 
 	componentDidMount() {
-			this._setHeight();
+			this.setHeight();
 	}
 
-	componentWillReceiveProps() {
+	componentWillReceiveProps(newProps: Props) {
 			//Should execute after the new item animation
 			setTimeout(() => {
-					this._setHeight();
+					this.setHeight();
 			}, 0);
+
+			if (newProps.shouldScroll && newProps.warehouse.id === newProps.nextWarehouseId) {
+				InteractionHelper.scrollToElement(
+					React.findDOMNode(this.refs['warehouseProductRow'])
+				);
+			}
 	}
 
   move(productId, event: Event) {
@@ -45,9 +55,19 @@ class WarehouseProductsRowComponent extends React.Component<Props, WarehouseProd
 
       products.forEach(p => {
 				let rowCssClasses = classNames({'new-item': p.isNew});
+
         rows.push(
           <tr className={rowCssClasses} key={`warehouse-product-${p.id}`} id={`warehouse-product-${p.id}`}>
-               <td>{p.name}</td>
+              <td>
+								<label>
+									<input
+										type="checkbox"
+										checked={p.checked}
+										onChange={this.handleProductCheckboxChange.bind(this, warehouse.id, p.id)}
+									/>
+									{` ${p.name}`}
+								</label>
+							</td>
                <td>{p.quantity}</td>
                <td><a href="#" onClick={this.move.bind(this, p.id)}>Move</a></td>
 							 <td></td>
@@ -56,7 +76,7 @@ class WarehouseProductsRowComponent extends React.Component<Props, WarehouseProd
       });
 
     return (
-    	<tr className="well warehouse-products-row">
+    	<tr className="well warehouse-products-row" ref="warehouseProductRow">
       	<td colSpan={4} className={cellCssClasses}>
         	<div className="wrapper" style={wrapperStyles}>
             <table className="table table-bordered" ref="warehouseProductsTable">
@@ -76,7 +96,11 @@ class WarehouseProductsRowComponent extends React.Component<Props, WarehouseProd
     );
   }
 
-	_setHeight() {
+	private handleProductCheckboxChange = (warehouseId, productId, e) => {
+		WarehouseActions.toogleWarehouseProduct(warehouseId, productId, e.target.checked);
+	}
+
+	private setHeight(): void {
 		let height = this.props.warehouse.expanded ? React.findDOMNode(this.refs['warehouseProductsTable']).clientHeight : 0;
 		this.setState({height: height});
 	}
