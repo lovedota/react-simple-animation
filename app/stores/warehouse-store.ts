@@ -155,11 +155,13 @@ class WarehouseStore extends EventEmitter {
       });
 
       newProducts.forEach(p => {
-        p.isNew = true;
-        p.checked = false;
+        if (warehouse.products.indexOf(p) === -1) {
+          p.isNew = true;
+          p.checked = false;
+          warehouse.products.push(p);
+        }
       });
 
-      warehouse.products = warehouse.products.concat(newProducts);
       return warehouse;
     });
 
