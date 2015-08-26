@@ -11,6 +11,7 @@ interface WarehouseAction {
   warehouseId?: string;
   productId: string;
   checked?:boolean;
+  nextWarehouseId?: string;
 }
 
 let _warehouses: Immutable.Map<string, Warehouse>,
@@ -51,6 +52,10 @@ class WarehouseStore extends EventEmitter {
 
         case WarehouseConstants.WAREHOUSE_MOVE_SELECTED_PRODUCT_TO_WAREHOUSE:
           this.removeSelectedProductsFromCurrentWarehouse();
+          break;
+
+        case WarehouseConstants.WAREHOUSE_NEXT_WAREHOUSE_CHANGE:
+          _nextWarehouseId = action.nextWarehouseId;
           break;
 
         default:

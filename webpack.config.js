@@ -36,5 +36,5 @@ module.exports = {
         new ExtractTextPlugin("styles.css")
     ],
     debug: true,
-    devtool: 'source-map'
+    devtool: 'inline-source-map'
 };

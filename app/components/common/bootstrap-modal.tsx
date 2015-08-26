@@ -8,6 +8,7 @@ interface Props extends React.Props<any> {
   confirm: string;
   cancel: string;
   title: string;
+  disabled?: boolean;
 }
 
 class BootstrapModal extends React.Component<Props, {}> {
@@ -37,8 +38,10 @@ class BootstrapModal extends React.Component<Props, {}> {
     if (this.props.confirm) {
       confirmButton = (
         <button
+          disabled={this.props.disabled}
           onClick={this._handleConfirm}
-          className="btn btn-primary">
+          className="btn btn-primary"
+        >
           {this.props.confirm}
         </button>
       );
@@ -46,7 +49,10 @@ class BootstrapModal extends React.Component<Props, {}> {
 
     if (this.props.cancel) {
       cancelButton = (
-        <button onClick={this._handleCancel} className="btn btn-default">
+        <button
+          onClick={this._handleCancel}
+          className="btn btn-default"
+        >
           {this.props.cancel}
         </button>
       );
@@ -78,14 +84,14 @@ class BootstrapModal extends React.Component<Props, {}> {
     );
   }
 
-  _handleCancel(): void {
+  _handleCancel = () => {
     this.close();
     if (this.props.onCancel) {
       this.props.onCancel();
     }
   }
 
-  _handleConfirm(): void {
+  _handleConfirm = () => {
     this.close();
     if (this.props.onConfirm) {
       this.props.onConfirm();

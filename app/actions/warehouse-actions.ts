@@ -27,6 +27,13 @@ class WarehouseActions {
     });
   }
 
+  saveSelectedNextWarehouse(nextWarehouseId) {
+    Dispatcher.dispatch({
+      type: WarehouseConstants.WAREHOUSE_NEXT_WAREHOUSE_CHANGE,
+      nextWarehouseId
+    });  
+  }
+
   moveSelectedProductsToWarehouse() {
     let TIMEOUT_ANIMATION = 500;
 
