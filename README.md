@@ -34,3 +34,7 @@ import * as someLib from 'someLib'; // this will work
 import { someProp } from 'someLib'; // this will also work  
 
 ```
+
+### Demo
+
+![Demo Image](https://nq33jw.blu.livefilestore.com/y3mFFUX2ALJ03s7zUZ6E9BO31rIWQKhJW5Zc0fXtUhHxUz-QfIooyJPA4lmWjgMIN2_BKWy5iZy1Ao5RHQ-s5E-Jq95ag0U6QGF21cVlvb__JpQ731iE_joJhSkl-W930bCEybFsPdKX5boYjn_NO_YsXgVb1ucsf2Zssph0ztn4iQ/simple-animation.gif?psid=1)
